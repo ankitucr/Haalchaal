@@ -642,254 +642,581 @@ textarea::placeholder { color: var(--text-3); }
               <feGaussianBlur stdDeviation="3" result="blur"/>
               <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
             </filter>
-            <filter id="f-soft" x="-10%" y="-10%" width="120%" height="1            overflow-y: auto;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            scroll-behavior: smooth;
-        }
+            <filter id="f-soft" x="-10%" y="-10%" width="120%" height="120%">
+              <feGaussianBlur stdDeviation="1.5" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <!-- Iris gradient -->
+            <radialGradient id="g-iris-l" cx="40%" cy="35%" r="60%">
+              <stop offset="0%" stop-color="#7fffff"/>
+              <stop offset="40%" stop-color="#00b8cc"/>
+              <stop offset="100%" stop-color="#005566"/>
+            </radialGradient>
+            <radialGradient id="g-iris-r" cx="40%" cy="35%" r="60%">
+              <stop offset="0%" stop-color="#7fffff"/>
+              <stop offset="40%" stop-color="#00b8cc"/>
+              <stop offset="100%" stop-color="#005566"/>
+            </radialGradient>
+            <!-- Lip gradient -->
+            <linearGradient id="g-lip" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#f09090"/>
+              <stop offset="100%" stop-color="#e06070"/>
+            </linearGradient>
+            <clipPath id="clip-face"><ellipse cx="110" cy="100" rx="50" ry="58"/></clipPath>
+          </defs>
 
-        /* Hide scrollbar for cleaner look */
-        .chat-area::-webkit-scrollbar { display: none; }
+          <!-- ═══ BODY / SUIT ═══ -->
+          <!-- Main torso -->
+          <path d="M60 190 Q52 185 48 220 Q44 260 54 290 Q65 305 110 308 Q155 305 166 290 Q176 260 172 220 Q168 185 160 190 Z"
+                fill="url(#g-suit)" stroke="rgba(78,240,255,0.3)" stroke-width="0.8"/>
 
-        .encryption-notice {
-            text-align: center;
-            background: var(--light-green);
-            color: var(--primary-green);
-            font-size: 0.7rem;
-            padding: 8px 12px;
-            border-radius: 8px;
-            margin: 0 auto 10px;
-            max-width: 90%;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
+          <!-- Suit chest panel -->
+          <path d="M72 194 Q64 189 62 215 L74 230 L110 234 L146 230 L158 215 Q156 189 148 194 Z"
+                fill="#0a1520" stroke="rgba(78,240,255,0.4)" stroke-width="0.6"/>
 
-        .message {
-            max-width: 80%;
-            display: flex;
-            flex-direction: column;
-        }
+          <!-- Center glow strip -->
+          <line x1="110" y1="198" x2="110" y2="255"
+                stroke="url(#g-accent)" stroke-width="1.5" filter="url(#f-glow)"/>
 
-        .message.received {
-            align-self: flex-start;
-        }
+          <!-- Tech dots on chest -->
+          <circle cx="90" cy="212" r="3.5" fill="rgba(78,240,255,0.15)" stroke="rgba(78,240,255,0.6)" stroke-width="0.7" filter="url(#f-soft)"/>
+          <circle cx="130" cy="212" r="3.5" fill="rgba(78,240,255,0.15)" stroke="rgba(78,240,255,0.6)" stroke-width="0.7" filter="url(#f-soft)"/>
+          <circle cx="110" cy="222" r="5" fill="rgba(167,139,250,0.15)" stroke="rgba(167,139,250,0.5)" stroke-width="0.7" filter="url(#f-soft)"/>
 
-        .message.sent {
-            align-self: flex-end;
-        }
+          <!-- Collar -->
+          <path d="M85 190 L97 202 L110 198 L123 202 L135 190 Q123 182 110 184 Q97 182 85 190 Z"
+                fill="#0c1e30" stroke="rgba(78,240,255,0.35)" stroke-width="0.6"/>
 
-        .bubble {
-            padding: 12px 16px;
-            border-radius: 20px;
-            font-size: 0.95rem;
-            line-height: 1.4;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-        }
+          <!-- Shoulder armour L -->
+          <path d="M48 192 Q38 180 42 205 L58 208 L68 192 Z"
+                fill="#0c1e30" stroke="rgba(78,240,255,0.35)" stroke-width="0.7"/>
+          <line x1="44" y1="194" x2="47" y2="206" stroke="rgba(78,240,255,0.5)" stroke-width="0.8" filter="url(#f-soft)"/>
 
-        .received .bubble {
-            background: #f3f4f6;
-            color: var(--text-dark);
-            border-bottom-left-radius: 4px;
-        }
+          <!-- Shoulder armour R -->
+          <path d="M172 192 Q182 180 178 205 L162 208 L152 192 Z"
+                fill="#0c1e30" stroke="rgba(78,240,255,0.35)" stroke-width="0.7"/>
+          <line x1="176" y1="194" x2="173" y2="206" stroke="rgba(78,240,255,0.5)" stroke-width="0.8" filter="url(#f-soft)"/>
 
-        .sent .bubble {
-            background: var(--primary-green);
-            color: white;
-            border-bottom-right-radius: 4px;
-        }
+          <!-- Left arm -->
+          <path d="M56 196 Q40 200 32 220 Q27 240 34 260 Q40 272 50 268 Q58 264 62 246 Q66 224 64 205 Z"
+                fill="url(#g-suit)" stroke="rgba(78,240,255,0.2)" stroke-width="0.6"/>
+          <line x1="39" y1="214" x2="40" y2="252" stroke="rgba(78,240,255,0.35)" stroke-width="0.6" filter="url(#f-soft)"/>
 
-        .msg-time {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            margin-top: 4px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
+          <!-- Right arm -->
+          <path d="M164 196 Q180 200 188 220 Q193 240 186 260 Q180 272 170 268 Q162 264 158 246 Q154 224 156 205 Z"
+                fill="url(#g-suit)" stroke="rgba(78,240,255,0.2)" stroke-width="0.6"/>
+          <line x1="181" y1="214" x2="180" y2="252" stroke="rgba(78,240,255,0.35)" stroke-width="0.6" filter="url(#f-soft)"/>
 
-        .sent .msg-time {
-            justify-content: flex-end;
-        }
+          <!-- Left hand (resting on hip subtle) -->
+          <ellipse cx="36" cy="264" rx="8" ry="6" fill="#f5c5a0" opacity="0.7"/>
 
-        /* --- INPUT AREA --- */
-        .input-area {
-            padding: 12px 15px;
-            background: white;
-            border-top: 1px solid var(--border-light);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding-bottom: env(safe-area-inset-bottom, 12px); /* For iOS notch safety */
-        }
+          <!-- Belt -->
+          <line x1="56" y1="260" x2="164" y2="260" stroke="rgba(78,240,255,0.35)" stroke-width="0.8"/>
+          <rect x="103" y="257" width="14" height="6" rx="1.5"
+                fill="#0a1520" stroke="rgba(78,240,255,0.6)" stroke-width="0.7"/>
+          <circle cx="110" cy="260" r="2" fill="rgba(78,240,255,0.7)" filter="url(#f-soft)"/>
 
-        .input-wrapper {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            background: #f3f4f6;
-            border-radius: 24px;
-            padding: 8px 15px;
-            gap: 10px;
-        }
+          <!-- Lower body panels -->
+          <path d="M58 264 L63 300 L90 302 L90 264 Z" fill="#0a1520" stroke="rgba(78,240,255,0.2)" stroke-width="0.5"/>
+          <path d="M162 264 L157 300 L130 302 L130 264 Z" fill="#0a1520" stroke="rgba(78,240,255,0.2)" stroke-width="0.5"/>
+          <path d="M90 264 L130 264 L130 302 L90 302 Z" fill="#080f1a" stroke="rgba(78,240,255,0.15)" stroke-width="0.5"/>
+          <line x1="73" y1="266" x2="74" y2="300" stroke="rgba(78,240,255,0.3)" stroke-width="0.6" filter="url(#f-soft)"/>
+          <line x1="147" y1="266" x2="146" y2="300" stroke="rgba(78,240,255,0.3)" stroke-width="0.6" filter="url(#f-soft)"/>
 
-        .input-wrapper input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            outline: none;
-            font-size: 0.95rem;
-            color: var(--text-dark);
-        }
+          <!-- ═══ NECK ═══ -->
+          <path d="M98 167 Q96 177 94 188 Q101 192 110 193 Q119 192 126 188 Q124 177 122 167 Z"
+                fill="url(#g-skin)"/>
+          <!-- Neck tech line subtle -->
+          <line x1="104" y1="172" x2="116" y2="172" stroke="rgba(78,240,255,0.15)" stroke-width="0.5"/>
 
-        .input-wrapper input::placeholder {
-            color: #9ca3af;
-        }
+          <!-- ═══ HEAD ═══ -->
+          <!-- Head base -->
+          <ellipse cx="110" cy="100" rx="50" ry="58" fill="url(#g-skin)"/>
+          <!-- Jaw / chin -->
+          <path d="M80 128 Q84 155 110 162 Q136 155 140 128" fill="url(#g-skin)"/>
 
-        .action-icon {
-            color: var(--text-muted);
-            font-size: 1.2rem;
-        }
+          <!-- ═══ EAR LEFT ═══ -->
+          <path d="M60 95 Q54 100 55 110 Q56 120 63 122 Q68 122 70 115 Q66 107 67 98 Z" fill="url(#g-skin)"/>
+          <!-- Ear canal -->
+          <path d="M62 102 Q60 108 62 114" stroke="#e8a882" stroke-width="1" fill="none" opacity="0.5"/>
+          <!-- Cyber ear stud -->
+          <circle cx="63" cy="107" r="2.5" fill="rgba(78,240,255,0.6)" stroke="rgba(78,240,255,0.8)" stroke-width="0.5" filter="url(#f-soft)"/>
 
-        .send-btn {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: var(--primary-green);
-            color: white;
-            border: none;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 10px rgba(41, 163, 126, 0.3);
-        }
+          <!-- ═══ EAR RIGHT ═══ -->
+          <path d="M160 95 Q166 100 165 110 Q164 120 157 122 Q152 122 150 115 Q154 107 153 98 Z" fill="url(#g-skin)"/>
+          <path d="M158 102 Q160 108 158 114" stroke="#e8a882" stroke-width="1" fill="none" opacity="0.5"/>
+          <circle cx="157" cy="107" r="2.5" fill="rgba(78,240,255,0.6)" stroke="rgba(78,240,255,0.8)" stroke-width="0.5" filter="url(#f-soft)"/>
 
-        /* --- CALL OVERLAY --- */
-        .call-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100dvh;
-            background: var(--bg-main);
-            z-index: 100;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 80px;
-        }
+          <!-- ═══ HAIR ═══ -->
+          <!-- Main hair back -->
+          <path d="M62 92 Q60 58 70 38 Q82 18 110 14 Q138 18 150 38 Q160 58 158 92 Q145 80 110 78 Q75 80 62 92 Z"
+                fill="url(#g-hair)"/>
+          <!-- Side hair left -->
+          <path d="M62 92 Q52 115 50 148 Q52 158 57 154 Q60 132 72 110 Z"
+                fill="#0f0720" opacity="0.92"/>
+          <path d="M66 94 Q57 120 56 152 Q58 157 61 154 Q63 134 74 112 Z"
+                fill="#0f0720" opacity="0.75"/>
+          <!-- Side hair right -->
+          <path d="M158 92 Q168 115 170 148 Q168 158 163 154 Q160 132 148 110 Z"
+                fill="#0f0720" opacity="0.92"/>
+          <path d="M154 94 Q163 120 164 152 Q162 157 159 154 Q157 134 146 112 Z"
+                fill="#0f0720" opacity="0.75"/>
+          <!-- Top hair detail -->
+          <path d="M80 40 Q90 22 110 16 Q130 22 140 40 Q130 34 110 32 Q90 34 80 40 Z"
+                fill="#140a28" opacity="0.7"/>
+          <!-- Hair highlight -->
+          <path d="M102 16 Q99 38 97 64 Q100 72 102 70 Q104 44 106 18 Z"
+                fill="#2a1450" opacity="0.5"/>
 
-        .call-avatar {
-            width: 120px; height: 120px;
-            border-radius: 50%;
-            background: var(--primary-green);
-            color: white; font-size: 4rem;
-            display: flex; justify-content: center; align-items: center;
-            margin-bottom: 20px;
-            box-shadow: 0 0 0 15px var(--light-green);
-        }
+          <!-- Subtle hair shine -->
+          <path d="M98 20 Q95 48 94 70" stroke="rgba(167,139,250,0.2)" stroke-width="2" fill="none" stroke-linecap="round"/>
 
-        .call-controls {
-            position: absolute;
-            bottom: 60px;
-            display: flex;
-            gap: 30px;
-        }
+          <!-- ═══ EYEBROWS ═══ -->
+          <!-- Left brow -->
+          <path id="brow-l" d="M82 72 Q93 67 102 70" stroke="#2a1840" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <!-- Right brow -->
+          <path id="brow-r" d="M118 70 Q127 67 138 72" stroke="#2a1840" stroke-width="2.5" fill="none" stroke-linecap="round"/>
 
-        .call-btn {
-            width: 65px; height: 65px;
-            border-radius: 50%; border: none;
-            font-size: 1.5rem; color: white; display: flex;
-            justify-content: center; align-items: center;
-        }
+          <!-- ═══ EYES ═══ -->
+          <!-- Left eye socket shadow -->
+          <ellipse cx="92" cy="88" rx="14" ry="10" fill="rgba(0,0,0,0.04)"/>
+          <!-- Left white -->
+          <ellipse id="eye-white-l" cx="92" cy="88" rx="12" ry="8.5" fill="#f8f5f0"/>
+          <!-- Left iris -->
+          <ellipse id="iris-l" cx="92" cy="88" rx="8" ry="8" fill="url(#g-iris-l)"/>
+          <!-- Left pupil -->
+          <ellipse id="pupil-l" cx="92" cy="88" rx="4" ry="4.5" fill="#001a22"/>
+          <!-- Left pupil glint -->
+          <ellipse cx="94" cy="85" rx="2" ry="1.8" fill="white" fill-opacity="0.9"/>
+          <ellipse cx="90" cy="90" rx="0.8" ry="0.8" fill="white" fill-opacity="0.5"/>
+          <!-- Left iris tech ring -->
+          <ellipse cx="92" cy="88" rx="8" ry="8" fill="none" stroke="rgba(78,240,255,0.5)" stroke-width="0.7" filter="url(#f-soft)"/>
+          <!-- Left upper lid -->
+          <path id="lid-l" d="M80 84 Q92 78 104 84" stroke="#1a0a28" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <!-- Lashes left -->
+          <g stroke="#1a0a28" stroke-width="1.3" stroke-linecap="round">
+            <line x1="80" y1="84" x2="78" y2="81"/>
+            <line x1="84" y1="81" x2="83" y2="78"/>
+            <line x1="88" y1="79" x2="88" y2="76"/>
+            <line x1="92" y1="79" x2="93" y2="76"/>
+            <line x1="96" y1="80" x2="98" y2="77"/>
+            <line x1="101" y1="83" x2="103" y2="81"/>
+          </g>
+          <!-- Lower lid left -->
+          <path d="M80 92 Q92 97 104 92" stroke="#e8a882" stroke-width="0.8" fill="none" opacity="0.3"/>
 
-        .btn-end { background: #ef4444; }
-        .btn-mic { background: #f3f4f6; color: var(--text-dark); }
-    </style>
-</head>
-<body>
+          <!-- Right eye socket -->
+          <ellipse cx="128" cy="88" rx="14" ry="10" fill="rgba(0,0,0,0.04)"/>
+          <!-- Right white -->
+          <ellipse id="eye-white-r" cx="128" cy="88" rx="12" ry="8.5" fill="#f8f5f0"/>
+          <!-- Right iris -->
+          <ellipse id="iris-r" cx="128" cy="88" rx="8" ry="8" fill="url(#g-iris-r)"/>
+          <!-- Right pupil -->
+          <ellipse id="pupil-r" cx="128" cy="88" rx="4" ry="4.5" fill="#001a22"/>
+          <!-- Right pupil glint -->
+          <ellipse cx="130" cy="85" rx="2" ry="1.8" fill="white" fill-opacity="0.9"/>
+          <ellipse cx="126" cy="90" rx="0.8" ry="0.8" fill="white" fill-opacity="0.5"/>
+          <!-- Right iris tech ring -->
+          <ellipse cx="128" cy="88" rx="8" ry="8" fill="none" stroke="rgba(78,240,255,0.5)" stroke-width="0.7" filter="url(#f-soft)"/>
+          <!-- Right upper lid -->
+          <path id="lid-r" d="M116 84 Q128 78 140 84" stroke="#1a0a28" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <!-- Lashes right -->
+          <g stroke="#1a0a28" stroke-width="1.3" stroke-linecap="round">
+            <line x1="116" y1="84" x2="114" y2="81"/>
+            <line x1="120" y1="81" x2="119" y2="78"/>
+            <line x1="124" y1="79" x2="124" y2="76"/>
+            <line x1="128" y1="79" x2="129" y2="76"/>
+            <line x1="132" y1="80" x2="134" y2="77"/>
+            <line x1="137" y1="83" x2="139" y2="81"/>
+          </g>
+          <!-- Lower lid right -->
+          <path d="M116 92 Q128 97 140 92" stroke="#e8a882" stroke-width="0.8" fill="none" opacity="0.3"/>
 
-    <!-- Header -->
-    <div class="chat-header">
-        <div class="header-left">
-            <button class="back-btn"><i class="fa-solid fa-arrow-left"></i></button>
-            <div class="profile-pic"><i class="fa-solid fa-user-tie"></i></div>
-            <div class="user-info">
-                <span class="user-name">Shiva Jaiswal</span>
-                <span class="user-status">Online</span>
-            </div>
-        </div>
-        <div class="header-right">
-            <button class="icon-btn" onclick="showCall()"><i class="fa-solid fa-phone"></i></button>
-            <button class="icon-btn"><i class="fa-solid fa-video"></i></button>
-            <button class="icon-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-        </div>
+          <!-- ═══ NOSE ═══ -->
+          <path d="M107 108 Q105 120 102 124 Q106 127 110 126 Q114 127 118 124 Q115 120 113 108"
+                stroke="#d4a080" stroke-width="1.2" fill="none" opacity="0.5" stroke-linecap="round"/>
+          <!-- Nostrils -->
+          <ellipse cx="104" cy="125" rx="3" ry="1.8" fill="#d4a080" opacity="0.25"/>
+          <ellipse cx="116" cy="125" rx="3" ry="1.8" fill="#d4a080" opacity="0.25"/>
+
+          <!-- ═══ LIPS ═══ -->
+          <!-- Upper lip -->
+          <path id="lip-top" d="M96 145 Q102 140 110 142 Q118 140 124 145 Q118 148 110 147 Q102 148 96 145 Z"
+                fill="url(#g-lip)" fill-opacity="0.9"/>
+          <!-- Lower lip -->
+          <path id="lip-bot" d="M96 145 Q102 152 110 153 Q118 152 124 145 Q118 148 110 147 Q102 148 96 145 Z"
+                fill="#e07080" fill-opacity="0.8"/>
+          <!-- Lip shine -->
+          <ellipse cx="107" cy="146" rx="5" ry="2" fill="white" fill-opacity="0.2"/>
+          <!-- Mouth line (neutral) -->
+          <path id="mouth-line" d="M97 145 Q110 146 123 145" stroke="#c06070" stroke-width="0.5" fill="none" opacity="0.4"/>
+
+          <!-- ═══ CHEEKS & FACE DETAILS ═══ -->
+          <!-- Blush left -->
+          <ellipse cx="77" cy="108" rx="13" ry="8" fill="#ff8090" fill-opacity="0.10"/>
+          <!-- Blush right -->
+          <ellipse cx="143" cy="108" rx="13" ry="8" fill="#ff8090" fill-opacity="0.10"/>
+
+          <!-- Subtle freckle dots -->
+          <circle cx="86" cy="116" r="0.8" fill="#d4a080" opacity="0.3"/>
+          <circle cx="134" cy="118" r="0.8" fill="#d4a080" opacity="0.3"/>
+
+          <!-- ═══ CYBER DETAILS ON FACE ═══ -->
+          <!-- Left temple data line -->
+          <path d="M64 92 Q68 96 72 94" stroke="rgba(78,240,255,0.35)" stroke-width="0.8" fill="none" filter="url(#f-soft)"/>
+          <circle cx="64" cy="92" r="1.5" fill="rgba(78,240,255,0.5)" filter="url(#f-soft)"/>
+          <!-- Right temple data line -->
+          <path d="M156 92 Q152 96 148 94" stroke="rgba(78,240,255,0.35)" stroke-width="0.8" fill="none" filter="url(#f-soft)"/>
+          <circle cx="156" cy="92" r="1.5" fill="rgba(78,240,255,0.5)" filter="url(#f-soft)"/>
+
+          <!-- Subtle iris glow pulse -->
+          <ellipse cx="92" cy="88" rx="9" ry="9" fill="none" stroke="rgba(78,240,255,0.4)" filter="url(#f-soft)">
+            <animate attributeName="opacity" values="0;0.6;0" dur="3.5s" repeatCount="indefinite"/>
+            <animate attributeName="stroke-width" values="0;1.5;0" dur="3.5s" repeatCount="indefinite"/>
+          </ellipse>
+          <ellipse cx="128" cy="88" rx="9" ry="9" fill="none" stroke="rgba(78,240,255,0.4)" filter="url(#f-soft)">
+            <animate attributeName="opacity" values="0;0.6;0" dur="3.5s" repeatCount="indefinite" begin="0.1s"/>
+            <animate attributeName="stroke-width" values="0;1.5;0" dur="3.5s" repeatCount="indefinite" begin="0.1s"/>
+          </ellipse>
+
+          <!-- Blink animation layer (transparent eyelids) -->
+          <ellipse id="blink-l" cx="92" cy="88" rx="12" ry="0" fill="url(#g-skin)" opacity="0"/>
+          <ellipse id="blink-r" cx="128" cy="88" rx="12" ry="0" fill="url(#g-skin)" opacity="0"/>
+
+        </svg>
+      </div>
+
+      <div class="avatar-fade"></div>
+
+      <!-- Lip bars -->
+      <div class="lip-bars" id="lipBars">
+        <div class="lip-bar"></div><div class="lip-bar"></div><div class="lip-bar"></div>
+        <div class="lip-bar"></div><div class="lip-bar"></div><div class="lip-bar"></div>
+        <div class="lip-bar"></div>
+      </div>
+
+      <div class="holo-platform"></div>
+      <div class="avatar-label">
+        <div class="avatar-led" id="avLed"></div>
+        <span class="avatar-state-txt" id="avTxt">Ready</span>
+      </div>
     </div>
 
-    <!-- Chat Area -->
-    <div class="chat-area" id="chatArea">
-        <div class="encryption-notice">
-            <i class="fa-solid fa-lock"></i> Messages are E2E encrypted.
-        </div>
+  </div><!-- /avatar-col -->
 
-        <div class="message received">
-            <div class="bubble">Backend structure kaisa chal raha hai? Oracle par shift karna hai?</div>
-            <div class="msg-time">10:40 AM</div>
-        </div>
+  <!-- ══ CHAT COLUMN ══ -->
+  <div class="chat-col" id="chatCol" style="display:contents">
 
-        <div class="message sent">
-            <div class="bubble">Abhi EC2 par STUN/TURN (Coturn) configure kar diya hai. Low internet par bhi call nahi kategi ab! 🔥</div>
-            <div class="msg-time">10:42 AM <i class="fa-solid fa-check-double" style="color: var(--primary-green);"></i></div>
+    <!-- Top bar -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <div class="app-icon">🧠</div>
+        <div>
+          <div class="app-name">Pika</div>
+          <div class="app-tag">Neural Companion</div>
         </div>
+      </div>
+      <div class="conn-dot">
+        <div class="conn-dot-led" id="connLed"></div>
+        <span id="connTxt">—</span>
+      </div>
     </div>
 
-    <!-- Input Area -->
+    <!-- Status bar -->
+    <div class="status-bar">
+      <div class="stat-item">RAM <span id="ramEl">—</span>%</div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">EVO <span id="evoEl">—</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">UP <span id="upEl">—</span></div>
+      <button class="btn-evolve" id="btnEvo">⚡ Evolve</button>
+    </div>
+
+    <!-- Messages -->
+    <div class="messages" id="messages">
+      <div class="welcome">
+        <div class="welcome-tag">Pika · Online</div>
+        <div class="welcome-bubble">
+          Hey Ankit! 👋 Main hoon <strong>Pika</strong> — teri personal AGI.<br>
+          Kuch bhi poocho, ya voice se bolo — main yahan hoon.
+        </div>
+      </div>
+      <div class="chips" id="chips">
+        <button class="chip" data-q="Status batao — battery aur RAM?">📊 Status</button>
+        <button class="chip" data-q="Screen pe kya hai?">👁️ Screen</button>
+        <button class="chip" data-q="WiFi on karo">📶 WiFi</button>
+        <button class="chip" data-q="Torch on karo">🔦 Torch</button>
+        <button class="chip" data-q="Evolution history batao">🧬 Evolution</button>
+        <button class="chip" data-q="Kya naya seekha aaj?">💭 Update</button>
+      </div>
+    </div>
+
+    <!-- Input area -->
     <div class="input-area">
-        <i class="fa-solid fa-plus action-icon" style="color: var(--primary-green);"></i>
-        <div class="input-wrapper">
-            <input type="text" id="msgInput" placeholder="Message">
-            <i class="fa-regular fa-face-smile action-icon"></i>
-            <i class="fa-solid fa-paperclip action-icon"></i>
+      <div class="input-row">
+        <div class="input-box">
+          <textarea id="inp" placeholder="Kuch bhi poocho..." rows="1" maxlength="3000"></textarea>
         </div>
-        <button class="send-btn" onclick="sendMsg()"><i class="fa-solid fa-paper-plane"></i></button>
+        <button class="icon-btn btn-voice" id="btnVoice" title="Voice input">🎙️</button>
+        <button class="icon-btn btn-send" id="btnSend">↑</button>
+      </div>
+      <div class="voice-hint" id="vHint"></div>
     </div>
 
-    <!-- Call Overlay -->
-    <div class="call-overlay" id="callScreen">
-        <h2 style="color: var(--text-dark); font-weight: 600; margin-bottom: 5px;">Shiva Jaiswal</h2>
-        <p style="color: var(--primary-green); margin-bottom: 50px;">Calling...</p>
-        <div class="call-avatar"><i class="fa-solid fa-user-tie"></i></div>
-        
-        <div class="call-controls">
-            <button class="call-btn btn-mic"><i class="fa-solid fa-microphone-lines-slash"></i></button>
-            <button class="call-btn btn-end" onclick="hideCall()"><i class="fa-solid fa-phone-slash"></i></button>
-            <button class="call-btn btn-mic"><i class="fa-solid fa-volume-high"></i></button>
-        </div>
-    </div>
+  </div><!-- /chat-col -->
 
-    <script>
-        // Smooth scrolling aur auto-scroll to bottom
-        const chatArea = document.getElementById('chatArea');
-        const msgInput = document.getElementById('msgInput');
-        
-        function sendMsg() {
-            if(msgInput.value.trim() === '') return;
-            const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            const html = `
-                <div class="message sent">
-                    <div class="bubble">${msgInput.value}</div>
-                    <div class="msg-time">${time} <i class="fa-solid fa-check" style="color: #9ca3af;"></i></div>
-                </div>`;
-            chatArea.insertAdjacentHTML('beforeend', html);
-            msgInput.value = '';
-            chatArea.scrollTo({ top: chatArea.scrollHeight, behavior: 'smooth' });
-        }
+</div><!-- /app -->
 
-        // Call UI Toggle
-        function showCall() { document.getElementById('callScreen').style.display = 'flex'; }
-        function hideCall() { document.getElementById('callScreen').style.display = 'none'; }
-    </script>
-</body>
-</html>
+<script>
+// ═══════════════════════════════════════════             // PIKA UI ENGINE
+// ═══════════════════════════════════════════
+
+// ── LAYOUT: apply proper structure on desktop ──
+function applyLayout() {
+  const app      = document.getElementById('app');
+  const avCol    = document.getElementById('avatarCol');
+  const chatCol  = document.getElementById('chatCol');
+  const avSec    = document.getElementById('avatarSection');
+
+  if (window.innerWidth >= 640) {
+    app.style.flexDirection = 'row';
+    avCol.style.display     = 'flex';
+    avCol.style.width       = '320px';
+    avCol.style.flexShrink  = '0';
+    avCol.style.flexDirection = 'column';
+    avCol.style.borderRight = '1px solid rgba(255,255,255,0.07)';
+    avCol.style.overflow    = 'hidden';
+    avSec.style.flex        = '1';
+    avSec.style.height      = 'auto';
+    chatCol.style.display   = 'flex';
+    chatCol.style.flex      = '1';
+    chatCol.style.flexDirection = 'column';
+    chatCol.style.overflow  = 'hidden';
+    chatCol.style.minWidth  = '0';
+  } else {
+    app.style.flexDirection = 'column';
+    avCol.style.display     = 'contents';
+    chatCol.style.display   = 'contents';
+    avSec.style.height      = '280px';
+    avSec.style.flex        = '';
+  }                                                        }                                                          applyLayout();
+window.addEventListener('resize', applyLayout);
+
+// ── ELEMENTS ──────────────────────────────
+const $ = id => document.getElementById(id);
+const msgs    = $('messages');
+const inp     = $('inp');
+const btnSend = $('btnSend');
+const btnVoice= $('btnVoice');
+const btnEvo  = $('btnEvo');                               const avLed   = $('avLed');
+const avTxt   = $('avTxt');
+const lipBars = $('lipBars');
+const pikaSvg = $('pikaSvg');
+const connLed = $('connLed');
+const connTxt = $('connTxt');
+const ramEl   = $('ramEl');
+const evoEl   = $('evoEl');
+const upEl    = $('upEl');
+const vHint   = $('vHint');
+
+let busy = false, thinkEl = null, speaking = false, recording = false;
+let socket, recog;
+
+// ── BLINK ENGINE ──────────────────────────
+// Natural eye blink every 3–6 seconds                     let blinkInterval;
+function doBlink() {
+  const l = $('blink-l'), r = $('blink-r');
+  if(!l||!r) return;
+  // Close                                                   l.setAttribute('ry','8.5'); l.setAttribute('opacity','1');                                                            r.setAttribute('ry','8.5'); r.setAttribute('opacity','1');                                                            setTimeout(()=>{
+    l.setAttribute('ry','0'); l.setAttribute('opacity','0');
+    r.setAttribute('ry','0'); r.setAttribute('opacity','0');                                                            }, 120);
+}                                                          function startBlink() {
+  clearInterval(blinkInterval);
+  const next = () => { doBlink(); blinkInterval = setTimeout(next, 3000 + Math.random()*4000); };
+  blinkInterval = setTimeout(next, 2000);                  }
+startBlink();                                              
+// ── EXPRESSION ENGINE ─────────────────────              // Changes eyebrows, pupils, lips to show emotion
+const expressions = {
+  neutral: {
+    browL: 'M82 72 Q93 67 102 70',                             browR: 'M118 70 Q127 67 138 72',
+    lipTop:'M96 145 Q102 140 110 142 Q118 140 124 145 Q118 148 110 147 Q102 148 96 145 Z',
+    lipBot:'M96 145 Q102 152 110 153 Q118 152 124 145 Q118 148 110 147 Q102 148 96 145 Z',
+    pupilL:{cx:92,cy:88},pupilR:{cx:128,cy:88},
+  },                                                         happy: {
+    browL: 'M82 70 Q93 64 102 68',
+    browR: 'M118 68 Q127 64 138 70',                           lipTop:'M96 145 Q102 137 110 139 Q118 137 124 145 Q118 147 110 146 Q102 147 96 145 Z',                                lipBot:'M96 145 Q103 155 110 156 Q117 155 124 145 Q118 147 110 146 Q102 147 96 145 Z',
+    pupilL:{cx:92,cy:87},pupilR:{cx:128,cy:87},              },
+  thinking: {                                                  browL: 'M82 70 Q93 72 102 69',
+    browR: 'M118 69 Q127 72 138 70',
+    lipTop:'M96 147 Q102 143 110 144 Q118 143 124 147 Q118 149 110 148 Q102 149 96 147 Z',
+    lipBot:'M96 147 Q102 152 110 153 Q118 152 124 147 Q118 149 110 148 Q102 149 96 147 Z',
+    pupilL:{cx:90,cy:87},pupilR:{cx:130,cy:87},              },
+  surprised: {                                                 browL: 'M82 68 Q93 62 102 66',                             browR: 'M118 66 Q127 62 138 68',
+    lipTop:'M98 145 Q104 139 110 141 Q116 139 122 145 Q116 148 110 147 Q104 148 98 145 Z',                                lipBot:'M98 145 Q104 154 110 156 Q116 154 122 145 Q116 148 110 147 Q104 148 98 145 Z',
+    pupilL:{cx:92,cy:89},pupilR:{cx:128,cy:89},
+  },
+  speaking: {                                                  browL: 'M82 71 Q93 66 102 70',
+    browR: 'M118 70 Q127 66 138 71',                           lipTop:'M96 144 Q102 139 110 141 Q118 139 124 144 Q118 147 110 146 Q102 147 96 144 Z',                                lipBot:'M96 144 Q102 153 110 155 Q118 153 124 144 Q118 147 110 146 Q102 147 96 144 Z',
+    pupilL:{cx:92,cy:88},pupilR:{cx:128,cy:88},
+  },
+};
+                                                           function applyExpression(name) {
+  const ex = expressions[name] || expressions.neutral;       const set = (id,attr,val) => { const el=document.getElementById ? document.getElementById(id) : null; if(el) el.setAttribute(attr,val); };
+  set('brow-l','d',ex.browL);
+  set('brow-r','d',ex.browR);                                set('lip-top','d',ex.lipTop);
+  set('lip-bot','d',ex.lipBot);                              set('pupil-l','cx',ex.pupilL.cx); set('pupil-l','cy',ex.pupilL.cy);
+  set('pupil-r','cx',ex.pupilR.cx); set('pupil-r','cy',ex.pupilR.cy);
+}                                                          
+// ── AVATAR STATE ──────────────────────────              function setAvatarState(state) {                             // LED + text
+  avLed.className = 'avatar-led ' + state;
+  const labels = { '':'Ready', thinking:'Thinking...', speaking:'Speaking', listening:'Listening', happy:'Happy' };
+  avTxt.textContent = labels[state] || 'Ready';
+
+  // SVG filter                                              pikaSvg.className = state;
+                                                             // Expression
+  applyExpression(state || 'neutral');
+
+  // Lip bars
+  if(state==='speaking') lipBars.classList.add('on');        else lipBars.classList.remove('on');
+}                                                          
+// ── TTS ───────────────────────────────────              const synth = window.speechSynthesis;
+let pikaVoice = null;
+function loadVoice() {
+  const vs = synth.getVoices();                              pikaVoice = vs.find(v => /samantha|zira|google uk english female|female/i.test(v.name))                                 || vs.find(v => v.lang === 'en-US') || vs[0] || null;
+}
+synth.onvoiceschanged = loadVoice;                         setTimeout(loadVoice, 500);
+                                                           function speak(text) {
+  if (!synth) return;
+  synth.cancel();
+  const clean = text.replace(/```[\s\S]*?```/g,' ').replace(/[*_#`\[\]]/g,'').substring(0,320).trim();                  if(!clean) return;
+  const u = new SpeechSynthesisUtterance(clean);             if(pikaVoice) u.voice = pikaVoice;
+  u.rate = 0.92; u.pitch = 1.1; u.volume = 1;                u.onstart = () => { speaking=true; setAvatarState('speaking'); };
+  u.onend = u.onerror = () => { speaking=false; setAvatarState(''); };
+  synth.speak(u);                                          }
+
+// ── VOICE INPUT ───────────────────────────              function setupVoice() {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SR) { btnVoice.style.opacity='0.3'; return; }
+  recog = new SR();
+  recog.continuous=false; recog.interimResults=true; recog.lang='hi-IN';
+
+  recog.onstart = () => {
+    recording=true; btnVoice.classList.add('recording');
+    setAvatarState('listening');                               vHint.textContent='🎙️ Sun rahi hoon...'; vHint.style.opacity='1';                                                    };
+  recog.onresult = e => {                                      let f='',interim='';
+    for(let i=e.resultIndex;i<e.results.length;i++) {
+      if(e.results[i].isFinal) f+=e.results[i][0].transcript;                                                               else interim+=e.results[i][0].transcript;
+    }                                                          const shown = f||interim;
+    vHint.textContent = shown ? `"${shown}"` : '🎙️ Sun rahi hoon...';                                                      if(f) inp.value=f;
+  };                                                         recog.onend = () => {                                        recording=false; btnVoice.classList.remove('recording');
+    vHint.style.opacity='0'; setAvatarState('');
+    setTimeout(()=>{ vHint.textContent=''; },300);
+    if(inp.value.trim()) send();                             };
+  recog.onerror = e => {                                       recording=false; btnVoice.classList.remove('recording');                                                              vHint.style.opacity='0'; setAvatarState('');
+    if(e.error!=='no-speech') vHint.textContent='Voice error: '+e.error;                                                };                                                       }
+setupVoice();                                              btnVoice.onclick = () => {
+  if(!recog) return;                                         if(recording){ recog.stop(); return; }                     if(speaking) synth.cancel();
+  try { recog.start(); } catch(e){}                        };                                                                                                                    // ── SOCKET ────────────────────────────────
+function initSocket() {                                      try {                                                        socket = io('http://localhost:3000', { transports:['websocket','polling'] });
+    socket.on('connect', () => {                                 connLed.className='conn-dot-led ok'; connTxt.textContent='Live';
+      socket.emit('request_status');
+    });
+    socket.on('disconnect', () => { connLed.className='conn-dot-led err'; connTxt.textContent='Off'; });
+    socket.on('connect_error', () => { connLed.className='conn-dot-led err'; connTxt.textContent='No server'; });
+    socket.on('pika_thinking', ({status}) => { if(status) setBusy(true); else setBusy(false); });
+    socket.on('pika_reply', ({reply,error,timestamp}) => {
+      removeBusy();
+      addMsg('pika', reply, timestamp, error);
+      if(!error) { setAvatarState('happy'); setTimeout(()=>speak(reply),200); }                                           });
+    socket.on('pika_status', s => updateStats(s));
+    socket.on('pika_state', ({sleeping,shutdown}) => {
+      if(shutdown){connLed.className='conn-dot-led err'; connTxt.textContent='Shutdown';}
+    });
+  } catch(e) { connTxt.textContent='Error'; }
+}
+initSocket();                                                                                                         // ── STATS ─────────────────────────────────
+function updateStats(s) {
+  if(s.memory?.percent !== undefined) ramEl.textContent = s.memory.percent;                                             if(s.evolution?.rate) evoEl.textContent = s.evolution.rate;
+  if(s.uptime !== undefined) {                                 const m = Math.floor(s.uptime/60), h = Math.floor(m/60);                                                              upEl.textContent = h>0 ? `${h}h ${m%60}m` : `${m}m`;
+  }                                                        }
+setInterval(()=>{ if(socket?.connected) socket.emit('request_status'); },30000);
+
+// ── STATE HELPERS ─────────────────────────
+function setBusy(on) {
+  busy = on; btnSend.disabled = on; btnEvo.disabled = on;
+  if(on){ setAvatarState('thinking'); thinkEl = addThinking(); }
+  else  { setAvatarState(''); }
+}
+function removeBusy() {                                      busy=false; btnSend.disabled=false; btnEvo.disabled=false;
+  if(thinkEl){ thinkEl.remove(); thinkEl=null; }
+}
+
+// ── RENDER ────────────────────────────────
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');                                   const fmt = t => t                                           .replace(/```([\s\S]*?)```/g,(_,c)=>`<pre>${esc(c.trim())}</pre>`)                                                    .replace(/`([^`]+)`/g,(_,c)=>`<code>${esc(c)}</code>`)     .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
+const timeStr = ts => ts
+  ? new Date(ts).toLocaleTimeString('en-IN',{hour12:true,hour:'numeric',minute:'2-digit'})
+  : new Date().toLocaleTimeString('en-IN',{hour12:true,hour:'numeric',minute:'2-digit'});                             
+function removeWelcome() {
+  const w=msgs.querySelector('.welcome'); if(w) w.remove();
+}
+
+function addMsg(role,text,ts,error=false) {
+  removeWelcome();
+  const el=document.createElement('div');
+  el.className=`msg ${role}${error?' error':''}`;
+  el.innerHTML=`<div class="msg-meta">${role==='user'?'You':'Pika'} · ${timeStr(ts)}</div>
+    <div class="msg-bubble">${fmt(text)}</div>`;
+  msgs.appendChild(el);
+  msgs.scrollTop=msgs.scrollHeight;
+  return el;
+}                                                          function addThinking() {
+  removeWelcome();
+  const el=document.createElement('div');
+  el.className='msg pika';
+  el.innerHTML=`<div class="msg-meta">Pika · ${timeStr()}</div>
+    <div class="thinking-bubble"><div class="td"></div><div class="td"></div><div class="td"></div></div>`;
+  msgs.appendChild(el);
+  msgs.scrollTop=msgs.scrollHeight;
+  return el;
+}
+
+// ── SEND ──────────────────────────────────
+function send() {                                            const text=inp.value.trim(); if(!text||busy) return;
+  addMsg('user',text);
+  inp.value=''; inp.style.height='auto';
+
+  if(socket?.connected) {
+    socket.emit('user_message',{message:text});
+    setBusy(true);
+  } else {
+    setBusy(true);                                             fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text})})      .then(r=>r.json())
+      .then(d=>{ removeBusy(); addMsg('pika',d.reply||d.error,null,!!d.error); if(d.reply){setAvatarState('happy');setTimeout(()=>speak(d.reply),200);} })
+      .catch(e=>{ removeBusy(); addMsg('pika','Server se connect nahi ho paya: '+e.message,null,true); });
+  }                                                        }                                                          
+// ── EVOLVE ────────────────────────────────
+btnEvo.onclick = () => {
+  if(busy) return;
+  addMsg('user','⚡ Evolution pulse trigger kar rahi hoon...');
+  if(socket?.connected){ socket.emit('autonomous_pulse'); setBusy(true); }
+  else {
+    setBusy(true);                                             fetch('/api/evolve',{method:'POST'})
+      .then(r=>r.json()).then(d=>{removeBusy();addMsg('pika',d.reply||d.error,null,!!d.error);})
+      .catch(e=>{removeBusy();addMsg('pika','Error: '+e.message,null,true);});                                          }
+};
+                                                           // ── CHIPS ─────────────────────────────────
+document.getElementById('chips').onclick = e => {            const c=e.target.closest('.chip'); if(!c||busy) return;
+  inp.value=c.dataset.q; send();
+};
+
+// ── INPUT EVENTS ──────────────────────────
+btnSend.onclick = send;                                    inp.addEventListener('keydown', e => { if(e.key==='Enter'&&!e.shiftKey&&!e.ctrlKey){e.preventDefault();send();} });
+inp.addEventListener('input', () => {
+  inp.style.height='auto';
+  inp.style.height=Math.min(inp.scrollHeight,100)+'px';    });
+
+// ── INITIAL BOOT ──────────────────────────              setTimeout(() => { setAvatarState('happy'); setTimeout(()=>{ setAvatarState(''); },2000); }, 800);
+
+// Focus input on desktop
+if(window.innerWidth>=640) inp.focus();
+
+</script>                                                  </body>                                                    </html>

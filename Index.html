@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haal Chaal - Premium Secure Messaging</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #050505;
+            color: #fff;
+            overflow-x: hidden;
+            /* Animated Background Gradient */
+            background: radial-gradient(circle at 15% 50%, rgba(20, 0, 50, 0.4), transparent 25%),
+                        radial-gradient(circle at 85% 30%, rgba(0, 30, 60, 0.4), transparent 25%);
+            background-color: #0a0a0a;
+        }
+
+        /* Moving glowing orbs in background */
+        .bg-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            animation: floatOrb 10s infinite alternate ease-in-out;
+        }
+        .orb-1 { width: 300px; height: 300px; background: #4f46e5; top: 10%; left: 10%; }
+        .orb-2 { width: 400px; height: 400px; background: #9333ea; bottom: 10%; right: 5%; animation-delay: -5s; }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        header {
+            text-align: center;
+            padding: 100px 20px 50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #a855f7, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        p.subtitle {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        /* 3D Showcase Section */
+        .showcase-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding: 40px 20px 100px;
+            perspective: 1500px; /* Crucial for 3D effect */
+        }
+
+        /* Glassmorphic 3D Mobile Phone */
+        .phone-card {
+            width: 280px;
+            height: 560px;
+            border-radius: 40px;
+            /* Premium Glassmorphism */
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 
+                        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            position: relative;
+            transform-style: preserve-3d;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            animation: floatingPhone 6s ease-in-out infinite;
+        }
+
+        /* Different animation delays so they don't float together */
+        .phone-card:nth-child(1) { animation-delay: 0s; }
+        .phone-card:nth-child(2) { animation-delay: 1s; }
+        .phone-card:nth-child(3) { animation-delay: 2s; }
+        .phone-card:nth-child(4) { animation-delay: 3s; }
+        .phone-card:nth-child(5) { animation-delay: 4s; }
+
+        @keyframes floatingPhone {
+            0%, 100% { transform: translateY(0) rotateX(5deg) rotateY(-5deg); }
+            50% { transform: translateY(-20px) rotateX(10deg) rotateY(5deg); }
+        }
+
+        /* Hover 3D Pop Effect */
+        .phone-card:hover {
+            transform: translateY(-30px) scale(1.05) rotateX(0deg) rotateY(0deg) !important;
+            box-shadow: 0 30px 60px rgba(79, 70, 229, 0.3), 
+                        inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+            z-index: 20;
+            animation-play-state: paused;
+        }
+
+        /* Phone Notch */
+        .notch {
+            width: 120px;
+            height: 25px;
+            background: #000;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        /* Inner Content Styling */
+        .phone-header {
+            padding: 40px 20px 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.05), transparent);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .phone-header i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #a855f7, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .phone-header h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .phone-body {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            position: relative;
+        }
+
+        /* Dynamic UI Elements for Cards */
+        .chat-bubble {
+            background: rgba(255,255,255,0.1);
+            padding: 12px 15px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            width: 80%;
+            backdrop-filter: blur(5px);
+        }
+        .chat-bubble.right {
+            background: linear-gradient(45deg, #4f46e5, #3b82f6);
+            align-self: flex-end;
+            border-bottom-right-radius: 0;
+        }
+        .chat-bubble.left {
+            border-bottom-left-radius: 0;
+        }
+
+        .wave-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            height: 100px;
+        }
+        .wave {
+            width: 6px;
+            height: 20px;
+            background: #a855f7;
+            border-radius: 10px;
+            animation: soundWave 1s infinite alternate ease-in-out;
+        }
+        .wave:nth-child(2) { animation-delay: 0.2s; height: 40px;}
+        .wave:nth-child(3) { animation-delay: 0.4s; height: 60px;}
+        .wave:nth-child(4) { animation-delay: 0.6s; height: 40px;}
+        .wave:nth-child(5) { animation-delay: 0.8s; }
+
+        @keyframes soundWave {
+            0% { transform: scaleY(0.5); background: #3b82f6; }
+            100% { transform: scaleY(1.5); background: #a855f7; }
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            gap: 10px;
+            height: 100%;
+        }
+        .video-box {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            color: rgba(255,255,255,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .status-ring {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: none;
+            border: 3px solid transparent;
+            background-image: linear-gradient(#111, #111), linear-gradient(45deg, #f59e0b, #ec4899);
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 10px;
+        }
+        .status-row { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+        .status-text h4 { font-size: 0.9rem; }
+        .status-text p { font-size: 0.7rem; color: #94a3b8; }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #10b981, #3b82f6);
+            margin: 0 auto 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Download Button */
+        .cta-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+            text-decoration: none;
+            background: linear-gradient(90deg, #4f46e5, #9333ea);
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.4);
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(147, 51, 234, 0.6);
+        }
+
+        /* Floating particles for depth */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0; left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+
+    <header>
+        <h1>Haal Chaal</h1>
+        <p class="subtitle">Experience the future of secure communication. Crystal clear calls, encrypted chats, and a premium ad-free interface.</p>
+        <a href="#" class="cta-btn"><i class="fa-brands fa-google-play"></i> Get it for ₹7</a>
+    </header>
+
+    <section class="showcase-container">
+        
+        <!-- 1. Chat Feature -->
+        <div class="phone-card">
+            <div class="notch"></div>
+            <div class="phone-header">
+                <i class="fa-solid fa-message"></i>
+                <h3>Secure Chats</h3>
+            </div>
+            <div class="phone-body">
+                <div class="chat-bubble left">Hi, is this secure?</div>
+                <div class="chat-bubble right">100% End-to-End Encrypted! 🔒</div>
+                <div class="chat-bubble left">Awesome interface bro!</div>
+                <div class="chat-bubble right">Yeah, pure glassmorphism ✨</div>
+            </div>
+        </div>
+
+        <!-- 2. Voice Call Feature -->
+        <div class="phone-card">
+            <div class="notch"></div>
+            <div class="phone-header">
+                <i class="fa-solid fa-phone-volume"></i>
+                <h3>Crystal Voice</h3>
+            </div>
+            <div class="phone-body" style="justify-content: center;">
+                <p style="text-align: center; color: #94a3b8; font-size: 0.8rem; margin-bottom: 20px;">Powered by Opus Codec</p>
+                <div class="wave-container">
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                </div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <i class="fa-solid fa-microphone-lines" style="font-size: 2rem; color: #10b981;"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Video Call Feature -->
+        <div class="phone-card">
+            <div class="notch"></div>
+            <div class="phone-header">
+                <i class="fa-solid fa-video"></i>
+                <h3>WebRTC Video</h3>
+            </div>
+            <div class="phone-body">
+                <div class="video-grid">
+                    <div class="video-box"><i class="fa-regular fa-user"></i></div>
+                    <div class="video-box" style="border-color: #3b82f6;"><i class="fa-solid fa-user-astronaut"></i></div>
+                </div>
+                <p style="text-align: center; color: #94a3b8; font-size: 0.7rem; margin-top: 10px;">Low Network Optimized</p>
+            </div>
+        </div>
+
+        <!-- 4. Status Feature -->
+        <div class="phone-card">
+            <div class="notch"></div>
+            <div class="phone-header">
+                <i class="fa-solid fa-circle-notch"></i>
+                <h3>24H Status</h3>
+            </div>
+            <div class="phone-body">
+                <div class="status-row">
+                    <div class="status-ring"><i class="fa-solid fa-plus"></i></div>
+                    <div class="status-text">
+                        <h4>My Status</h4>
+                        <p>Tap to add update</p>
+                    </div>
+                </div>
+                <hr style="border:0; border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: 15px;">
+                <div class="status-row">
+                    <div class="status-ring" style="width: 40px; height: 40px;"><i class="fa-regular fa-image"></i></div>
+                    <div class="status-text">
+                        <h4>Shiva Jaiswal</h4>
+                        <p>10 minutes ago</p>
+                    </div>
+                </div>
+                <div class="status-row">
+                    <div class="status-ring" style="width: 40px; height: 40px;"><i class="fa-solid fa-music"></i></div>
+                    <div class="status-text">
+                        <h4>Ram Singh</h4>
+                        <p>1 hour ago</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Profile Feature -->
+        <div class="phone-card">
+            <div class="notch"></div>
+            <div class="phone-header">
+                <i class="fa-solid fa-id-badge"></i>
+                <h3>VIP Profile</h3>
+            </div>
+            <div class="phone-body" style="align-items: center; justify-content: center; text-align: center;">
+                <div class="profile-avatar">
+                    <i class="fa-solid fa-user-tie"></i>
+                </div>
+                <h3 style="margin-bottom: 5px;">Ankit Kumar <i class="fa-solid fa-circle-check" style="color: #3b82f6; font-size: 0.9rem;"></i></h3>
+                <p style="color: #94a3b8; font-size: 0.8rem; margin-bottom: 20px;">Founder & Architect</p>
+                <div style="background: rgba(255,255,255,0.05); padding: 10px 20px; border-radius: 10px; width: 100%;">
+                    <p style="font-size: 0.8rem; color: #a855f7;">Premium Ad-Free Member</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <script>
+        // Optional JS to add interaction logic later (Like modal popups for download)
+        document.querySelector('.cta-btn').addEventListener('click', (e) => {
+            e.preventDefault();
+            alert("App Download integration ready to be connected!");
+        });
+    </script>
+</body>
+</html>
